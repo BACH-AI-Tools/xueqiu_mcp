@@ -10,3 +10,4 @@ wheels/
 .venv
 .env
 3rdparty/
+.vscode/

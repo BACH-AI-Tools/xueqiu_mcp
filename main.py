@@ -8,7 +8,7 @@ import json
 load_dotenv()
 ball.set_token(os.getenv("XUEQIU_TOKEN"))
 
-mcp = FastMCP(name="Xueqiu MCP")
+mcp = FastMCP(name="Xueqiu MCP", host="0.0.0.0", port=9999)
 
 
 def convert_timestamps(data):
@@ -507,4 +507,4 @@ def suggest_stock(keyword: str="SZ000002") -> dict:
 
 if __name__ == "__main__":
     # This code only runs when the file is executed directly
-    mcp.run()
+    mcp.run(transport="sse")
