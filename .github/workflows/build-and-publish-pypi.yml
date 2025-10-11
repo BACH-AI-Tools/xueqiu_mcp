@@ -9,12 +9,10 @@ on:
     types: [ published ]
 
 jobs:
-  test:
+  build-and-publish:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ['3.10', '3.11', '3.12']
-
+    if: github.event_name == 'release' && github.event.action == 'published'
+    
     steps:
     - uses: actions/checkout@v4
     
@@ -23,16 +21,18 @@ jobs:
       with:
         version: "latest"
     
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.10'
     
-    - name: Install dependencies
+    - name: Build package
       run: |
-        uv sync --dev
-        uv tool install ruff
+        uv build
     
+    - name: Publish to PyPI
+      run: |
+        uv publish --token ${{ secrets.PYPI_API_TOKEN }}
     - name: Format with ruff
       run: |
         uv tool run ruff format .
