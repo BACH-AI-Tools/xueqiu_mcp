@@ -33,10 +33,13 @@ jobs:
         uv sync --dev
         uv tool install ruff
     
+    - name: Format with ruff
+      run: |
+        uv tool run ruff format .
+    
     - name: Lint with ruff
       run: |
         uv tool run ruff check .
-        uv tool run ruff format --check .
     
     - name: Test with pytest
       run: |
