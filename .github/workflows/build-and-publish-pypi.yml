@@ -31,11 +31,12 @@ jobs:
     - name: Install dependencies
       run: |
         uv sync --dev
+        uv tool install ruff
     
     - name: Lint with ruff
       run: |
-        uv run ruff check .
-        uv run ruff format --check .
+        uv tool run ruff check .
+        uv tool run ruff format --check .
     
     - name: Test with pytest
       run: |
