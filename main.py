@@ -3,7 +3,6 @@ import pysnowball as ball
 from fastmcp import FastMCP
 from dotenv import load_dotenv
 import datetime
-import json
 
 load_dotenv()
 ball.set_token(os.getenv("XUEQIU_TOKEN"))
